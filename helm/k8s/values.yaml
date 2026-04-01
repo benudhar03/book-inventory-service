@@ -1,0 +1,13 @@
+replicaCount: 2
+
+image:
+  repository: fastapi-books-app
+  tag: latest
+
+service:
+  type: NodePort
+  port: 80
+
+mongo:
+  uri: mongodb://mongo:27017
+  db: books_py_db
