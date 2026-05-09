@@ -2,7 +2,19 @@
 
 A scalable backend application built using **FastAPI** and **MongoDB**, supporting full CRUD operations, advanced search, validation, and async testing.
 
+## ⚡ Setup Instructions Quick Start (Run All Commands)
+### 🪟 Windows
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+pip list | findstr langchain
+uvicorn app.main:app --reload
+
+### ✅ Swagger UI
+    👉 Open: http://127.0.0.1:8000/docs
 ---
+
 
 ## 🚀 Features
 
