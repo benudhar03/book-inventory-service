@@ -1,4 +1,4 @@
-# 📚 FastAPI MongoDB CRUD Application
+# 📚 Async Book Inventory Service API using FastAPI and MongoDB
 
 A scalable backend application built using **FastAPI** and **MongoDB**, supporting full CRUD operations, advanced search, validation, and async testing.
 
