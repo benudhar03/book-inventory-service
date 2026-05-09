@@ -1,19 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: mongo
+  name: {{ .Values.mongodb.name }}
 spec:
-  replicas: 1
   selector:
-    matchLabels:
-      app: mongo
-  template:
-    metadata:
-      labels:
-        app: mongo
-    spec:
-      containers:
-        - name: mongo
-          image: mongo:6
-          ports:
-            - containerPort: 27017
+    app: {{ .Values.mongodb.name }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.mongodb.port }}
+      targetPort: {{ .Values.mongodb.port }}
+  type: ClusterIP

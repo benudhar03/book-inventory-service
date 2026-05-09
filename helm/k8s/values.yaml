@@ -1,13 +1,34 @@
-replicaCount: 2
+app:
+  name: book-inventory-service
+  replicas: 2
+  image:
+    repository: book-inventory-service
+    tag: latest
+    pullPolicy: IfNotPresent
+  port: 8000
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
 
-image:
-  repository: fastapi-books-app
-  tag: latest
+mongodb:
+  name: mongodb
+  replicas: 1
+  image: mongo:7.0
+  port: 27017
+  databaseName: books_py_db
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+  storage: 1Gi
 
-service:
-  type: NodePort
-  port: 80
-
-mongo:
-  uri: mongodb://mongo:27017
-  db: books_py_db
+env:
+  mongoUri: mongodb://mongodb:27017
+  databaseName: books_py_db

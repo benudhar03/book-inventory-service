@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-config
+  name: {{ .Values.app.name }}-config
 data:
-  DATABASE_NAME: books_py_db
+  MONGO_URI: {{ .Values.env.mongoUri | quote }}
+  DATABASE_NAME: {{ .Values.env.databaseName | quote }}
