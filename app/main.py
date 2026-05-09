@@ -1,14 +1,23 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from app.database import database
 from app.schemas import BookCreate
 from app.services import BookService
 from app.config import settings
 
-app = FastAPI()
 
+book_service: BookService = None
 
-# Initialize the BookService with the book collection
-book_service = BookService(database.get_collection(settings.BOOK_COLLECTION))
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await database.connect()
+    global book_service
+    book_service = BookService(database.get_collection(settings.BOOK_COLLECTION))
+    yield
+    await database.disconnect()
+
+app = FastAPI(lifespan=lifespan)
+
 
 @app.get("/books/search", tags=["Books"])
 async def search_books(title: str):
